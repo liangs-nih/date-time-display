@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Date & Time - US Timezones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .date-display {
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .timezone-section {
+            margin-top: 40px;
+            border-top: 2px solid #f0f0f0;
+            padding-top: 30px;
+        }
+
+        .timezone-section h2 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .timezone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .timezone-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timezone-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timezone-time {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timestamp {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Today's Date & Time</h1>
+        <p class="date-display">Thursday, May 14, 2026</p>
+
+        <div class="timezone-section">
+            <h2>Current Time (US Timezones)</h2>
+            <div class="timezone-grid">
+                <div class="timezone-card">
+                    <p class="timezone-name">Eastern</p>
+                    <p class="timezone-time">11:02:45 AM</p>
+                </div>
+                <div class="timezone-card">
+                    <p class="timezone-name">Central</p>
+                    <p class="timezone-time">10:02:45 AM</p>
+                </div>
+                <div class="timezone-card">
+                    <p class="timezone-name">Mountain</p>
+                    <p class="timezone-time">09:02:45 AM</p>
+                </div>
+                <div class="timezone-card">
+                    <p class="timezone-name">Pacific</p>
+                    <p class="timezone-time">08:02:45 AM</p>
+                </div>
+                <div class="timezone-card">
+                    <p class="timezone-name">Alaska</p>
+                    <p class="timezone-time">07:02:45 AM</p>
+                </div>
+                <div class="timezone-card">
+                    <p class="timezone-name">Hawaii</p>
+                    <p class="timezone-time">05:02:45 AM</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="timestamp">Last updated: May 14, 2026 at 11:02:45 AM EDT</p>
+    </div>
+</body>
+</html>
