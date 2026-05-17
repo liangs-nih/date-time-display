@@ -95,52 +95,95 @@
             font-size: 0.9rem;
             font-style: italic;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Today's Date & Time</h1>
-        <p class="date-display">Thursday, May 14, 2026</p>
+        <p class="date-display" id="date-display"></p>
 
         <div class="timezone-section">
             <h2>Current Time (US + International)</h2>
-            <div class="timezone-grid">
-                <div class="timezone-card">
-                    <p class="timezone-name">Eastern</p>
-                    <p class="timezone-time">11:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Central</p>
-                    <p class="timezone-time">10:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Mountain</p>
-                    <p class="timezone-time">09:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Pacific</p>
-                    <p class="timezone-time">08:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Alaska</p>
-                    <p class="timezone-time">07:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Hawaii</p>
-                    <p class="timezone-time">05:02:45 AM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">Greece</p>
-                    <p class="timezone-time">06:02:45 PM</p>
-                </div>
-                <div class="timezone-card">
-                    <p class="timezone-name">China</p>
-                    <p class="timezone-time">11:02:45 PM</p>
+            <div class="timezone-grid" id="timezone-grid">
+                <div class="timezone-card hidden" id="timezone-template">
+                    <p class="timezone-name"></p>
+                    <p class="timezone-time"></p>
                 </div>
             </div>
         </div>
 
-        <p class="timestamp">Last updated: May 14, 2026 at 11:02:45 AM EDT</p>
+        <p class="timestamp" id="last-updated"></p>
     </div>
+
+    <script>
+        const timezones = [
+            { name: 'Eastern', tz: 'America/New_York' },
+            { name: 'Central', tz: 'America/Chicago' },
+            { name: 'Mountain', tz: 'America/Denver' },
+            { name: 'Pacific', tz: 'America/Los_Angeles' },
+            { name: 'Alaska', tz: 'America/Anchorage' },
+            { name: 'Hawaii', tz: 'Pacific/Honolulu' },
+            { name: 'Greece', tz: 'Europe/Athens' },
+            { name: 'China', tz: 'Asia/Shanghai' }
+        ];
+
+        const dateDisplay = document.getElementById('date-display');
+        const timezoneGrid = document.getElementById('timezone-grid');
+        const timezoneTemplate = document.getElementById('timezone-template');
+        const lastUpdated = document.getElementById('last-updated');
+
+        const timezoneCards = timezones.map((zone) => {
+            const card = timezoneTemplate.cloneNode(true);
+            card.id = '';
+            card.classList.remove('hidden');
+            card.querySelector('.timezone-name').textContent = zone.name;
+            timezoneGrid.appendChild(card);
+            return { zone, card };
+        });
+
+        timezoneTemplate.remove();
+
+        function formatDate(now) {
+            return now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function formatTime(now, timeZone) {
+            return now.toLocaleTimeString('en-US', {
+                timeZone,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            dateDisplay.textContent = formatDate(now);
+
+            timezoneCards.forEach(({ zone, card }) => {
+                card.querySelector('.timezone-time').textContent = formatTime(now, zone.tz);
+            });
+
+            const easternLabel = now.toLocaleDateString('en-US', {
+                timeZone: 'America/New_York',
+                timeZoneName: 'short'
+            }).split(', ').pop();
+
+            lastUpdated.textContent = `Last updated: ${formatDate(now)} at ${formatTime(now, 'America/New_York')} ${easternLabel}`;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
